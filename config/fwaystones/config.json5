@@ -1,0 +1,7 @@
+{
+    teleportation_cost: {
+        "cost_type": "EXPERIENCE",
+        "base_cost": 10,
+        "cost_multiplier_between_dimensions": 2.0
+    }
+}
