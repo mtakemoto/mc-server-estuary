@@ -8,16 +8,22 @@ def copy2_verbose(src, dst):
     print('Copying {0}'.format(src))
     shutil.copy2(src,dst)
 
+#TODO: Automatically grab and run the script from Curseforge.  Provide a CLI arg for running this on an already
+# downloaded world vs fresh init.  CLI arg for version or "latest" nice to have too.
 print("Please download and initialize the new modpack before running this script on it")
+
+#TODO: Accept command line argument for easier testing
 newModpackPath = input('Path to the new modpack version: ')
 
 # Apply OPS file
+# TODO: Refactor to generic copy/overwrite file
 print("Copying ops file...")
 opsPath = os.path.join(newModpackPath, "ops.json")
 shutil.copy2('./ops.json', opsPath)
 print("Done")
 
 # Apply properties file
+# TODO: Refactor this to generic patch properties file
 print("Copying server.properties config over...")
 propertiesDestPath = os.path.join(newModpackPath, "server.properties")
 patchConfig = Properties()
@@ -40,6 +46,7 @@ with open(propertiesDestPath, 'r+b') as dest_file:
     destFileConfig.store(dest_file)
 
 # Copy mods over
+# TODO: refactor to generic copy folder contents method
 print("Copying mods over")
 modsPath = os.path.join(newModpackPath, "mods")
 try:
@@ -48,6 +55,7 @@ except OSError as err:
     print(err)
 
 # Set mod configs
+#TODO: Refactor this to generic JSON patch
 ## Set waystone config
 fwaystone_dest_path = os.path.join(newModpackPath, 'config/fwaystones/config.json5')
 with open('./config/fwaystones/config.json5', 'r') as f:
@@ -61,3 +69,6 @@ with open('./config/fwaystones/config.json5', 'r') as f:
         dest_fd.seek(0)
         dest_fd.truncate()
         dest_fd.write(result_str)
+
+#TODO: delete the world folder at the destination that's generated with initial start
+#TODO: zip the patch server folder for upload
