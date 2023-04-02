@@ -6,6 +6,7 @@ This folder contains customizations for Matt's semi-custom Minecraft server.
 
 ## Server Optimization Notes
 https://github.com/YouHaveTrouble/minecraft-optimization
+
 https://gist.github.com/Obydux/55b967f5dcc00633fe895e5a473363d5
 
 ## Server Upgrade Instructions
@@ -21,8 +22,16 @@ https://gist.github.com/Obydux/55b967f5dcc00633fe895e5a473363d5
 1. Unzip modified server modpack on the server
 1. Start server
 
+## Script Dev
+1. install pipenv with `pip install --user pipenv`
+1. run `pipenv install --dev`
+1. run `pipenv --py` to get the path to the 🐍 virtualenv executable
+1. `ctrl-shift-p` and type `python interperter`
+1. Paste in the path from the previous command
+1. You've got VSCode linting now 👍
+
 ## Rollback
-1. From backup control Panel, choose restore. 
+1. From backup control Panel, choose restore.
 
 ## Server Upgrade Automation
 TODO
