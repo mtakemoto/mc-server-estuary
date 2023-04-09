@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "mrmlnc.vscode-json5",
+        "ms-python.python",
+        "ms-python.pylint"
+    ]
+}
