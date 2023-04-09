@@ -7,6 +7,7 @@ name = "pypi"
 jproperties = "*"
 jsonmerge = "*"
 argparse = "*"
+loguru = "*"
 
 [dev-packages]
 
