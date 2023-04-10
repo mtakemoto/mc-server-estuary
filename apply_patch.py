@@ -32,7 +32,8 @@ def handle_special_folders(entry: pathlib.Path, config: Config):
 
 def handle_file(source_file: pathlib.Path, dest_file: str):
     ext = source_file.suffix
-    if ext == '.json' or ext == '.json5':
+    #TODO: need to properly split these file types out
+    if ext in ('.json', '.json5'):
         lib.json5.copy_config(source_file.absolute(), dest_file)
     elif ext == '.properties':
         lib.properties.copy_config(source_file.absolute(), dest_file)

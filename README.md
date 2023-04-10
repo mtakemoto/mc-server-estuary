@@ -1,26 +1,32 @@
-# Minecraft Server - Estuary
-> Running All of Fabric 6
+# Allium: Smart Minecraft server config merge tool
 
-## Description
-This folder contains customizations for Matt's semi-custom Minecraft server.
+## Goals
+- Provide a low-code way to manage Minecraft server and mod settings across multiple versions of a modpack
+- Problem:
+  - You have a modded Minecraft server that has some config changes in various files like `server.properties`, the `ops.json` file and various modpack configs (e.g. waystones)
+  - When a new modpack version comes out, those changes need to be applied to the latest version of the modpack
+  - Modpack updates can be frequent, so automation is helpful
+  - You could fork the modpack repo and rebuild it, but that...
+    - Requires you to be fairly skilled with Git (able to merge upstream changes, handle conflicts)
+    - And even if you are, you'll still have to deal with merge conflicts in your spare time.  Wouldn't you rather be playing on your server?
+  - Mods may intoduce breaking config changes
 
-## Server Optimization Notes
-https://github.com/YouHaveTrouble/minecraft-optimization
+## Solution (?)
+Allium allows you to maintain a patch folder.  This is a folder with identical structure to your server, with each file **containing only the changes** (not the entire file) that you've made on top of the server defaults.
+For each of these patch files, Allium will load the corresponding file in your new server pack and update the value.
 
-https://gist.github.com/Obydux/55b967f5dcc00633fe895e5a473363d5
+## Requirements
+- Python 3.x
+- Pipenv (?)
+- TODO: make it easier to run the tool without cloning the directory
 
-## Server Upgrade Instructions
-1. Download AOF Server Pack https://www.curseforge.com/minecraft/modpacks/all-of-fabric-6
-1. Stop Server from Server Management > Console
-1. Start Server Backup from Server Management > Backup
-1. After backup has completed, make any required changes to Minecraft version or Fabric Loader in Server Management > Settings
-1. Unzip AOF Server Pack locally and manually merge the files in this repo with the server pack. #TODO Create diff and patch to apply changes.
-1. Rezip modified server pack
-1. Download backup and extract world files #TODO change this procedure to stash the world files in a temp directory so we don't have to download/upload
-1. Delete all files on server from control pannel
-1. SFTP modified server modpack and worldfiles to the server
-1. Unzip modified server modpack on the server
-1. Start server
+## Usage
+1. Download your server modpack locally and run the installer
+1. When finished, copy the path
+1. Run Allium (instructions TBD)
+  1. `python apply-patch.py -t "path-to-your-server-folder"`
+1. ???
+1. Go play Minecraft
 
 ## Script Dev
 1. install pipenv with `pip install --user pipenv`
@@ -29,12 +35,3 @@ https://gist.github.com/Obydux/55b967f5dcc00633fe895e5a473363d5
 1. `ctrl-shift-p` and type `python interperter`
 1. Paste in the path from the previous command
 1. You've got VSCode linting now 👍
-
-## Rollback
-1. From backup control Panel, choose restore.
-
-## Server Upgrade Automation
-TODO
-
-## Startup command (Aikar's flags)
-`-Xms5G -Xmx5G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true`
